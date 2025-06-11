@@ -51,12 +51,9 @@ npm run dev
 VITE_API_URL=https://api-prueba-uno.onrender.com
 ```
 
-## 👥 Contribución
-1. Fork del repositorio
-2. Crear rama feature (`git checkout -b feature/nueva-caracteristica`)
-3. Commit cambios (`git commit -m 'Agrega nueva característica'`)
-4. Push a la rama (`git push origin feature/nueva-caracteristica`)
-5. Crear Pull Request
 
 ## 📄 Licencia
 MIT
+
+##
+El proyecto se entrego hoy por que vercel me daba errores ayer y no dejaba subir el proyecto

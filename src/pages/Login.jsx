@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/auth';
 import Swal from 'sweetalert2';
 import routes from '../router/routes';
-import '../Styles/Login.css';
+import '../Styles/LoginStyles.css';
 
 const swalConfig = {
   background: 'var(--secondary-background)',
