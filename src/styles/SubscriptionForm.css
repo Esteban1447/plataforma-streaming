@@ -183,6 +183,28 @@
   margin: 0.5rem 0;
 }
 
+.plan-caracteristicas {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.plan-caracteristicas li {
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.plan-caracteristicas li::before {
+  content: '✓';
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .planes-grid {
     grid-template-columns: 1fr;
