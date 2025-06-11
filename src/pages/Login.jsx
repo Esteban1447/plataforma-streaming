@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/auth';
 import Swal from 'sweetalert2';
-import '../styles/Login.css';
 import routes from '../router/routes';
+import '../Styles/Login.css';
 
 const swalConfig = {
   background: 'var(--secondary-background)',
