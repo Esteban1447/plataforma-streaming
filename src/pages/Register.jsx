@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/auth';
 import Swal from 'sweetalert2';
-import '<div styleName={} />
-<styles />
-<loginStyles></loginStyles>.css';
+import '../styles/loginStyles.css';
 
 function Register() {
   const navigate = useNavigate();
