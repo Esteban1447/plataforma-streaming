@@ -57,3 +57,6 @@ MIT
 
 ##
 El proyecto se entrego hoy por que vercel me daba errores ayer y no dejaba subir el proyecto
+El proyecto su subio a netlify por que vercel me daba errores de compilacion 
+
+https://voluble-kulfi-8d8b1e.netlify.app/
