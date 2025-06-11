@@ -1,15 +1,13 @@
 const routes = {
-  HOME: '/',
-  LOGIN: '/login',
+  HOME: '/home',
+  LOGIN: '/',
   REGISTER: '/register',
   SUSCRIPCIONES: '/suscripciones',
-  PERFIL: '/perfil',
   NOT_FOUND: '*'
 };
 
 export const privateRoutes = [
-  routes.SUSCRIPCIONES,
-  routes.PERFIL
+  routes.SUSCRIPCIONES
 ];
 
 export default routes;

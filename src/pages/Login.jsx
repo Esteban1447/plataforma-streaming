@@ -3,6 +3,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/auth';
 import Swal from 'sweetalert2';
 import '../styles/Login.css';
+import routes from '../router/routes';
+
+const swalConfig = {
+  background: 'var(--secondary-background)',
+  color: 'var(--text-color)',
+  confirmButtonColor: 'var(--primary-color)',
+  customClass: {
+    popup: 'swal-dark-theme',
+    title: 'swal-title',
+    confirmButton: 'swal-confirm',
+    cancelButton: 'swal-cancel'
+  }
+};
 
 function Login() {
   const navigate = useNavigate();
@@ -17,31 +30,53 @@ function Login() {
     setIsLoading(true);
 
     try {
-      console.log('Intentando login con:', credentials);
+      // Validación básica
+      if (!credentials.email || !credentials.password) {
+        Swal.fire({
+          ...swalConfig,
+          icon: 'error',
+          title: 'Error',
+          text: 'Por favor complete todos los campos'
+        });
+        return;
+      }
+
+      console.log('Intentando login con:', {
+        email: credentials.email,
+        passwordLength: credentials.password.length
+      });
+      
       const result = await loginUser(credentials);
+      console.log('Resultado del login:', result);
       
       if (result.success) {
-        Swal.fire({
+        await Swal.fire({
+          ...swalConfig,
           icon: 'success',
           title: '¡Bienvenido!',
           text: `Bienvenido ${result.user.nombre || ''}`,
           timer: 1500,
-          showConfirmButton: false
+          showConfirmButton: false,
+          iconColor: '#4CAF50'
         });
-        navigate('/'); // Cambiamos la redirección a home
+        navigate(routes.HOME);
       } else {
-        Swal.fire({
+        await Swal.fire({
+          ...swalConfig,
           icon: 'error',
           title: 'Error de acceso',
-          text: result.error || 'Credenciales incorrectas'
+          text: result.error || 'Credenciales incorrectas',
+          iconColor: '#dc3545'
         });
       }
     } catch (error) {
       console.error('Error en login:', error);
       Swal.fire({
+        ...swalConfig,
         icon: 'error',
         title: 'Error',
-        text: 'Error de conexión con el servidor'
+        text: 'Error de conexión con el servidor',
+        iconColor: '#dc3545'
       });
     } finally {
       setIsLoading(false);

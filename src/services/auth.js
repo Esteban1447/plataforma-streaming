@@ -8,9 +8,25 @@ export const loginUser = async (credentials) => {
       throw new Error('Error al obtener los usuarios');
     }
 
+    // Log para debuggear
+    console.log('Usuarios encontrados:', usuarios);
+    console.log('Credenciales enviadas:', credentials);
+
     const usuario = usuarios.find(u => 
-      u.email?.toLowerCase() === credentials.email?.toLowerCase()
+      // Verificamos tanto email como correo ya que el backend puede usar cualquiera
+      (u.email?.toLowerCase() === credentials.email?.toLowerCase() ||
+       u.correo?.toLowerCase() === credentials.email?.toLowerCase())
     );
+
+    // Log para debuggear el usuario encontrado
+    console.log('Usuario encontrado:', usuario);
+
+    if (!usuario) {
+      return { 
+        success: false, 
+        error: 'Usuario no encontrado' 
+      };
+    }
 
     if (usuario && usuario.password === credentials.password) {
       const { password, ...userWithoutPassword } = usuario;
@@ -23,7 +39,7 @@ export const loginUser = async (credentials) => {
     
     return { 
       success: false, 
-      error: 'Credenciales inválidas' 
+      error: 'Contraseña incorrecta' 
     };
 
   } catch (error) {

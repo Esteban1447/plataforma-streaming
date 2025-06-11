@@ -94,3 +94,56 @@
 .cta-button:hover {
   opacity: 0.9;
 }
+
+.active-subscription {
+  border: 2px solid var(--primary-color);
+  position: relative;
+}
+
+.subscription-badge {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.subscription-status {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.subscription-status.active {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+}
+
+.subscription-status.inactive {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.status-icon {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.feature-card:hover .subscription-status.inactive {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}

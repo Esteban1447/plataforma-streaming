@@ -1,15 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { isAuthenticated } from '../services/auth';
 import MovieCarousel from '../components/MovieCarousel';
 import SubscriptionForm from '../components/SubscriptionForm';
-import { createSubscription } from '../services/subscriptions';
+import { createSubscription, getUserSubscriptions } from '../services/subscriptions';
 import '../styles/Home.css';
 
 function Home() {
   const [showForm, setShowForm] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+  const [activeSubscriptions, setActiveSubscriptions] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkSubscriptions = async () => {
+      if (isAuthenticated()) {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const result = await getUserSubscriptions(user.id);
+        if (result.success) {
+          setActiveSubscriptions(result.data);
+        }
+      }
+    };
+
+    checkSubscriptions();
+  }, []);
+
+  const isServiceActive = (categoria) => {
+    return activeSubscriptions.some(
+      sub => sub.categoria === categoria && sub.estado === 'activa'
+    );
+  };
 
   const features = [
     {
@@ -70,6 +91,35 @@ function Home() {
     }
   };
 
+  const renderFeatureCard = (feature, index) => {
+    const isActive = isServiceActive(feature.categoria);
+    
+    return (
+      <div 
+        key={index} 
+        className={`feature-card ${isActive ? 'active-subscription' : ''}`}
+        onClick={() => handleFeatureClick(feature)}
+      >
+        <div className="feature-icon">{feature.icon}</div>
+        <h3 className="feature-title">{feature.title}</h3>
+        <p className="feature-description">{feature.description}</p>
+        <div className={`subscription-status ${isActive ? 'active' : 'inactive'}`}>
+          {isActive ? (
+            <>
+              <span className="status-icon">✓</span>
+              <span>Suscripción Activa</span>
+            </>
+          ) : (
+            <>
+              <span className="status-icon">+</span>
+              <span>Suscribirse</span>
+            </>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div>
       <MovieCarousel />
@@ -86,18 +136,7 @@ function Home() {
       </section>
 
       <div className="features-grid">
-        {features.map((feature, index) => (
-          <div 
-            key={index} 
-            className="feature-card"
-            onClick={() => handleFeatureClick(feature)}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="feature-icon">{feature.icon}</div>
-            <h3 className="feature-title">{feature.title}</h3>
-            <p className="feature-description">{feature.description}</p>
-          </div>
-        ))}
+        {features.map((feature, index) => renderFeatureCard(feature, index))}
       </div>
 
       {showForm && selectedService && (

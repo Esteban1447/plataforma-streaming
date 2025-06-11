@@ -25,21 +25,64 @@ export const planesLuno = {
 
 export const createSubscription = async (subscriptionData) => {
   try {
-    const response = await fetchApi('/suscripciones', {
+    const user = JSON.parse(localStorage.getItem('user'));
+    
+    const newSubscription = {
+      ...subscriptionData,
+      userId: user.id,
+      fechaCreacion: new Date().toISOString()
+    };
+
+    const response = await fetchApi(endpoints.suscripciones, {
       method: 'POST',
-      body: JSON.stringify(subscriptionData),
+      body: JSON.stringify(newSubscription),
     });
+
+    if (!response.id) {
+      throw new Error('Error al crear la suscripción');
+    }
+
+    return { success: true, data: response };
+  } catch (error) {
+    console.error('Error creando suscripción:', error);
+    return { 
+      success: false, 
+      error: error.message || 'Error al crear la suscripción'
+    };
+  }
+};
+
+export const getUserSubscriptions = async (userId) => {
+  try {
+    const response = await fetchApi(`${endpoints.suscripciones}?userId=${userId}`);
     return { success: true, data: response };
   } catch (error) {
     return { success: false, error: error.message };
   }
 };
 
-export const getUserSubscriptions = async (userId) => {
+export const cancelSubscription = async (userId, categoria) => {
   try {
-    const response = await fetchApi(`/suscripciones?userId=${userId}`);
-    return { success: true, data: response };
+    const response = await fetchApi(`${endpoints.suscripciones}?userId=${userId}&categoria=${categoria}`);
+    if (response && response.length > 0) {
+      const subscription = response[0];
+      await fetchApi(`${endpoints.suscripciones}/${subscription.id}`, {
+        method: 'DELETE'
+      });
+      return { success: true };
+    }
+    throw new Error('No se encontró la suscripción');
   } catch (error) {
     return { success: false, error: error.message };
+  }
+};
+
+export const checkExistingSubscription = async (userId, categoria) => {
+  try {
+    const suscripciones = await fetchApi(`${endpoints.suscripciones}?userId=${userId}&categoria=${categoria}&estado=activa`);
+    return suscripciones.length > 0;
+  } catch (error) {
+    console.error('Error al verificar suscripción:', error);
+    return false;
   }
 };
