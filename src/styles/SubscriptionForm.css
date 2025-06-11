@@ -1,0 +1,194 @@
+.subscription-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.subscription-form {
+  background: var(--secondary-background);
+  color: var(--text-color);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  color: var(--text-color);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-submit,
+.btn-cancel {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-submit {
+  background: var(--primary-color);
+  color: white;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-submit:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn-cancel {
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.planes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.plan-card {
+  background: var(--secondary-background);
+  border: 1px solid var(--border-color);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(var(--primary-color-rgb), 0.1), rgba(var(--primary-color-rgb), 0.2));
+  z-index: -1;
+  transition: 0.3s;
+}
+
+.plan-card:hover {
+  background: var(--card-hover);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.plan-card.selected {
+  border-color: var(--primary-color);
+  background: var(--card-hover);
+}
+
+.plan-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.plan-card h3 {
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.plan-precio {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.plan-descripcion {
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.btn-cancel {
+  margin-top: 1rem;
+  width: auto;
+  padding: 0.8rem 2rem;
+}
+
+.confirmation-details {
+  text-align: left;
+  padding: 1.5rem;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.confirmation-details p {
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .planes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

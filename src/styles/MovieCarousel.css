@@ -1,0 +1,87 @@
+.movie-carousel {
+  width: 100%;
+  height: 70vh;
+  max-height: 700px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.carousel-image {
+  width: 100%;
+  height: 70vh;
+  max-height: 700px;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.slide-content {
+  position: relative;
+}
+
+.slide-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem 2rem 2rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7) 40%);
+  color: white;
+  transition: opacity 0.3s ease;
+}
+
+.slide-info h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.slide-info p {
+  font-size: 1.1rem;
+}
+
+.watch-now {
+  padding: 0.8rem 2rem;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.watch-now:hover {
+  opacity: 0.9;
+}
+
+/* Personalización de Swiper */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  background-color: rgba(255,255,255,0.2);
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(255,255,255,0.3);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1.2rem !important;
+}
+
+.swiper-pagination-bullet {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
